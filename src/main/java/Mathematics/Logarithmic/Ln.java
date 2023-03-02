@@ -16,7 +16,7 @@ public class Ln extends Writable implements LogExecutable{
         {
             digit -= 1;
 
-            for (int i = 1; i < 5000; i += 2)
+            for (int i = 1; i < 1000000; i += 2)
             {
                 summ += (Math.pow(digit, i)/(double)i - Math.pow(digit, i+1)/(double)(i+1));
             }
@@ -25,7 +25,7 @@ public class Ln extends Writable implements LogExecutable{
         {
             digit = (digit / (digit - 1));
 
-            for ( int i = 1; i < 1000; i ++ )
+            for ( int i = 1; i < 500000; i ++ )
             {
                 summ += 1.0 / (i * Math.pow(digit, i));
             }
