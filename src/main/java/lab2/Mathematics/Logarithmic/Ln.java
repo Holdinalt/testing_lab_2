@@ -33,7 +33,7 @@ public class Ln extends Writable implements LogExecutable{
 
         double out = summ; // Сделать out человеком
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
         return out;
     }

@@ -17,7 +17,7 @@ public class Tg extends Writable implements TrigExecutable{
 
         double out = sin.execute(digit) / cos.execute(digit);
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
         return out;
     }

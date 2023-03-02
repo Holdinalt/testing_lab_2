@@ -25,7 +25,7 @@ public class Log extends Writable implements LogExecutable{
             System.out.println("Ln function in Log class does not work: " + e.getMessage());
         }
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
         return out;
     }

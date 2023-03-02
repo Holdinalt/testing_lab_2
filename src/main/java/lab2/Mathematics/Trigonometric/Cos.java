@@ -20,7 +20,7 @@ public class Cos extends Writable implements TrigExecutable{
         else
             out = -Math.sqrt(1 - Math.pow(sin.execute(x), 2));
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
         return out;
     }

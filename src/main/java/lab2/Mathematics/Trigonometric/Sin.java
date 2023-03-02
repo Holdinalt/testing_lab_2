@@ -35,7 +35,7 @@ public class Sin extends Writable implements TrigExecutable{
         }
         double out = summ; // сделать аут человеком
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
         return out;
     }
