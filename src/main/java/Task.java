@@ -2,6 +2,9 @@ import Logarithmic.Ln;
 import Logarithmic.Log;
 import Trigonometric.*;
 
+import java.io.FileWriter;
+import java.io.Writer;
+
 public class Task {
 
     private final Sin sin;
@@ -24,6 +27,8 @@ public class Task {
 
     public static void main(String[] args) {
 
+        FileWriter writer = setupWriter();
+
     }
 
     private double higherThanZero(double x){
@@ -39,5 +44,16 @@ public class Task {
                 - (log.execute(x, 5) * log.execute(x, 3)));
 
         return Math.pow(temp, 3);
+    }
+
+    private static FileWriter setupWriter(){
+        FileWriter writer;
+        try {
+            writer = new FileWriter("out.txt", false);
+            return writer;
+        } catch (Exception e){
+            System.out.println("Проблема с записью в фаил out.txt");
+            return null;
+        }
     }
 }
