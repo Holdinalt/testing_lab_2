@@ -5,6 +5,7 @@ import lab2.Mathematics.Logarithmic.Log;
 import lab2.Mathematics.Trigonometric.*;
 
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Task {
 
@@ -26,10 +27,39 @@ public class Task {
         this.log = new Log(new Ln());
     }
 
-    public static void main(String[] args) {
+    public Task(FileWriter writer) {
+        this.sin = new Sin();
+        this.cos = new Cos(sin);
+        this.tg = new Tg(sin, cos);
+        this.ctg = new Ctg(sin, cos);
+        this.sec = new Sec(cos);
+        this.csc = new Csc(sin);
+        this.log = new Log(new Ln());
+
+        this.sin.setWriter(writer);
+        this.cos.setWriter(writer);
+        this.tg.setWriter(writer);
+        this.ctg.setWriter(writer);
+        this.sec.setWriter(writer);
+        this.csc.setWriter(writer);
+        this.log.setWriter(writer);
+    }
+
+    public static void main(String[] args) throws IOException {
 
         FileWriter writer = setupWriter();
+        Task task = new Task(writer);
+        System.out.println(task.Calculate(16));
 
+        writer.flush();
+        writer.close();
+    }
+
+    public double Calculate(double x){
+        if (x > 0)
+            return higherThanZero(x);
+        else
+            return lessThanZero(x);
     }
 
     private double higherThanZero(double x){
