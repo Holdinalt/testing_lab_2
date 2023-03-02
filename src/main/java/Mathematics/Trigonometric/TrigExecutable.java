@@ -1,4 +1,4 @@
-package Trigonometric;
+package Mathematics.Trigonometric;
 
 public interface TrigExecutable {
 

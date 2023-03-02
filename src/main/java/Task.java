@@ -1,9 +1,8 @@
-import Logarithmic.Ln;
-import Logarithmic.Log;
-import Trigonometric.*;
+import Mathematics.Logarithmic.Ln;
+import Mathematics.Logarithmic.Log;
+import Mathematics.Trigonometric.*;
 
 import java.io.FileWriter;
-import java.io.Writer;
 
 public class Task {
 

@@ -1,4 +1,4 @@
-package Logarithmic;
+package Mathematics.Logarithmic;
 
 public interface LogExecutable{
 

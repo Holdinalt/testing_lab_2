@@ -1,6 +1,7 @@
-package Logarithmic;
+package Mathematics.Logarithmic;
+import Mathematics.Writable;
 
-public class Log implements LogExecutable{
+public class Log extends Writable implements LogExecutable{
 
     private final LogExecutable ln;
 
@@ -23,6 +24,8 @@ public class Log implements LogExecutable{
         } catch (Exception e){
             System.out.println("Ln function in Log class does not work: " + e.getMessage());
         }
+
+        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getName()});
 
         return out;
     }
