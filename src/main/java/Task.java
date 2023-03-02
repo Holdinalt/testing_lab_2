@@ -27,8 +27,7 @@ public class Task {
     public static void main(String[] args) {
 
         FileWriter writer = setupWriter();
-        Task task = new Task();
-        System.out.println(task.log.execute(11, 2));
+
     }
 
     private double higherThanZero(double x){
