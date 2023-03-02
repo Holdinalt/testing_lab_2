@@ -1,5 +1,5 @@
-package Mathematics.Trigonometric;
-import Mathematics.Writable;
+package lab2.Mathematics.Trigonometric;
+import lab2.Mathematics.Writable;
 
 public class Cos extends Writable implements TrigExecutable{
 

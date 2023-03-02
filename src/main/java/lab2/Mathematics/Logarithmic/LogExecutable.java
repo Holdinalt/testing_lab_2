@@ -1,4 +1,4 @@
-package Mathematics.Logarithmic;
+package lab2.Mathematics.Logarithmic;
 
 public interface LogExecutable{
 

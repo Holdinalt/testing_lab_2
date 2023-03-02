@@ -1,4 +1,4 @@
-package Mathematics;
+package lab2.Mathematics;
 
 import java.io.FileWriter;
 

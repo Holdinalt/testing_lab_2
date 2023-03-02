@@ -1,6 +1,8 @@
-import Mathematics.Logarithmic.Ln;
-import Mathematics.Logarithmic.Log;
-import Mathematics.Trigonometric.*;
+package lab2;
+
+import lab2.Mathematics.Logarithmic.Ln;
+import lab2.Mathematics.Logarithmic.Log;
+import lab2.Mathematics.Trigonometric.*;
 
 import java.io.FileWriter;
 

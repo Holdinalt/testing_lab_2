@@ -1,4 +1,4 @@
-package Mathematics.Trigonometric;
+package lab2.Mathematics.Trigonometric;
 
 public interface TrigExecutable {
 

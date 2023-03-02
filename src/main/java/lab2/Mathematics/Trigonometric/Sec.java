@@ -1,6 +1,6 @@
-package Mathematics.Trigonometric;
+package lab2.Mathematics.Trigonometric;
 
-import Mathematics.Writable;
+import lab2.Mathematics.Writable;
 
 public class Sec extends Writable implements TrigExecutable{
 
