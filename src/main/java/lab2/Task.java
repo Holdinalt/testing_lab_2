@@ -38,13 +38,13 @@ public class Task {
         this.csc = new Csc(sin);
         this.log = new Log(new Ln());
 
-        this.sin.setWriter(writer);
-        this.cos.setWriter(writer);
+        //this.sin.setWriter(writer);
+        //this.cos.setWriter(writer);
         this.tg.setWriter(writer);
-        this.ctg.setWriter(writer);
-        this.sec.setWriter(writer);
-        this.csc.setWriter(writer);
-        this.log.setWriter(writer);
+        //this.ctg.setWriter(writer);
+        //this.sec.setWriter(writer);
+        //this.csc.setWriter(writer);
+        //this.log.setWriter(writer);
     }
 
     public Task(TrigExecutable _sin, TrigExecutable _cos, TrigExecutable _tg, TrigExecutable _ctg, TrigExecutable _sec, TrigExecutable _csc, LogExecutable _log) {
@@ -68,7 +68,7 @@ public class Task {
     }
 
     public double Calculate(double x){
-        if (x > 0)
+        if (x <= 0)
             return higherThanZero(x);
         else
             return lessThanZero(x);
@@ -83,7 +83,8 @@ public class Task {
     }
 
     private double lessThanZero(double x){
-        double temp =  ((((log.execute(x, 5) - log.execute(x, 10)) + log.execute(x, 5)) - log.execute(x, 10)) -
+        double temp =  ((((log.execute(x, 5) - log.execute(x, 10))
+                + log.execute(x, 5)) - log.execute(x, 10))
                 - (log.execute(x, 5) * log.execute(x, 3)));
 
         return Math.pow(temp, 3);

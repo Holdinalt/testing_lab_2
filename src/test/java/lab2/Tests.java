@@ -89,6 +89,8 @@ public class Tests {
             public double execute(double digit, double base) {
                 if (base == Math.E)
                     return readFromCsvValue("src/test/resources/ln.csv", digit);
+                else if (base == 3)
+                    return readFromCsvValue("src/test/resources/log3.csv", digit);
                 else if (base == 5)
                     return readFromCsvValue("src/test/resources/log5.csv", digit);
                 else if (base == 10)
@@ -140,5 +142,29 @@ public class Tests {
 
         assertEquals(csc.execute(-4), 1.3213487, 0.1);
         assertEquals(csc.execute(4), -1.3213487, 0.1);
+    }
+
+    @Test
+    void mainFunctionTest()
+    {
+        Task task = new Task(SinMock, CosMock, TgMock, CtgMock, SecMock, CscMock, LogMock);
+
+        assertEquals(task.Calculate(0.5), -0.149738, 0.1);
+        assertEquals(task.Calculate(0.2), -8.83166, 0.1);
+        assertEquals(task.Calculate(1), 0, 0.1);
+        assertEquals(task.Calculate(2), 0, 0.1);
+        assertEquals(task.Calculate(5), -0.6425, 0.1);
+
+        assertEquals(task.Calculate(-0.1), 8.4499, 0.1);
+        assertEquals(task.Calculate(-0.2), 3.08731, 0.1);
+        assertEquals(task.Calculate(-0.5), 0.0912918, 0.1);
+        assertEquals(task.Calculate(-0.6), 0.002, 0.1);
+        assertEquals(task.Calculate(-0.5), 0.0912918, 0.1);
+        assertEquals(task.Calculate(-0.7), -0.0103, 0.1);
+        assertEquals(task.Calculate(-0.8), -0.3309, 0.1);
+        assertEquals(task.Calculate(-0.9), -27.5861, 0.1);
+        assertEquals(task.Calculate(-1.0), 2.8975636, 0.1);
+        assertEquals(task.Calculate(-2.0), 0.0227, 0.1);
+        assertEquals(task.Calculate(-1.0), 2.8975636, 0.1);
     }
 }
