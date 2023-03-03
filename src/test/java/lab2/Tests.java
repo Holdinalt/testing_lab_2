@@ -1,7 +1,6 @@
 package lab2;
 
-import lab2.Mathematics.Trigonometric.Csc;
-import lab2.Mathematics.Trigonometric.TrigExecutable;
+import lab2.Mathematics.Trigonometric.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +24,7 @@ public class Tests {
         {
             String[] lineInArray;
             while ((lineInArray = reader.readNext()) != null) {
-                if (Double.parseDouble(lineInArray[0]) == value)
+                if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0)/10.0)
                 {
                     return Double.parseDouble(lineInArray[1]);
                 }
@@ -82,6 +81,32 @@ public class Tests {
                 return readFromCsvValue("src/test/resources/tg.csv", digit);
             }
         };
+    }
+
+    @Test
+    void CosTest(){
+        Cos cos = new Cos(SinMock);
+
+        assertEquals(cos.execute(0),1, 0.1);
+
+        assertEquals(cos.execute(1), 0.5403, 0.1);
+        assertEquals(cos.execute(1.5), 0.0707, 0.1);
+        assertEquals(cos.execute(3), -0.99, 0.1);
+
+        assertEquals(cos.execute(-1), 0.5403, 0.1);
+        assertEquals(cos.execute(-1.5), 0.0707, 0.1);
+        assertEquals(cos.execute(-3), -0.99, 0.1);
+
+        assertEquals(cos.execute(3.3), -0.987, 0.1);
+        assertEquals(cos.execute(4), -0.6536, 0.1);
+        assertEquals(cos.execute(6.2), 0.9965, 0.1);
+
+        assertEquals(cos.execute(-3.3), -0.987, 0.1);
+        assertEquals(cos.execute(-4), -0.6536, 0.1);
+        assertEquals(cos.execute(-6.2), 0.9965, 0.1);
+
+        assertEquals(cos.execute(-12), 0.84385, 0.1);
+        assertEquals(cos.execute(25), 0.9912, 0.1);
     }
 
     @Test
