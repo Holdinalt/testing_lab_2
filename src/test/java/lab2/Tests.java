@@ -14,6 +14,10 @@ import java.io.IOException;
 public class Tests {
     static TrigExecutable SinMock;
     static TrigExecutable CosMock;
+    static TrigExecutable CscMock;
+    static TrigExecutable CtgMock;
+    static TrigExecutable SecMock;
+    static TrigExecutable TgMock;
 
     private static double readFromCsvValue(String filename, double value)
     {
@@ -43,14 +47,58 @@ public class Tests {
                 return readFromCsvValue("src/test/resources/sin.csv", digit);
             }
         };
+
+        CosMock = new TrigExecutable() {
+            @Override
+            public double execute(double digit) {
+                return readFromCsvValue("src/test/resources/cos.csv", digit);
+            }
+        };
+
+        CscMock = new TrigExecutable() {
+            @Override
+            public double execute(double digit) {
+                return readFromCsvValue("src/test/resources/csc.csv", digit);
+            }
+        };
+
+        CtgMock = new TrigExecutable() {
+            @Override
+            public double execute(double digit) {
+                return readFromCsvValue("src/test/resources/ctg.csv", digit);
+            }
+        };
+
+        SecMock = new TrigExecutable() {
+            @Override
+            public double execute(double digit) {
+                return readFromCsvValue("src/test/resources/sec.csv", digit);
+            }
+        };
+
+        TgMock = new TrigExecutable() {
+            @Override
+            public double execute(double digit) {
+                return readFromCsvValue("src/test/resources/tg.csv", digit);
+            }
+        };
     }
 
     @Test
     void CscTest(){
-
         Csc csc = new Csc(SinMock);
 
-        assertEquals(csc.execute(1), 1.188395, 0.1);
         assertEquals(csc.execute(0), Double.POSITIVE_INFINITY);
+
+        assertEquals(csc.execute(1), 1.188395, 0.1);
+        assertEquals(csc.execute(1.5), 1.002511, 0.1);
+        assertEquals(csc.execute(3), 7.085, 0.1);
+
+        assertEquals(csc.execute(-1), -1.188395, 0.1);
+        assertEquals(csc.execute(-1.5), -1.002511, 0.1);
+        assertEquals(csc.execute(-3), -7.085, 0.1);
+
+        assertEquals(csc.execute(-4), 1.3213487, 0.1);
+        assertEquals(csc.execute(4), -1.3213487, 0.1);
     }
 }
