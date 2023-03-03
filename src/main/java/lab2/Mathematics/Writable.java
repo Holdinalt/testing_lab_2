@@ -13,7 +13,7 @@ public abstract class Writable {
     protected void tryWriteToFile(String[] data){
         if(writer != null){
             try {
-                writer.write(String.join(";", data) + "\n");
+                writer.write(String.join(",", data) + "\n");
             }catch (Exception e){
                 System.out.println("Неудалось записать в файл");
             }

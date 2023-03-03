@@ -27,7 +27,7 @@ public class Sin extends Writable implements TrigExecutable{
         double summ = 0;
         double fact = 1;
         double sign = 1;
-        for (int i = 1; i < 500; i += 2)
+        for (int i = 1; i < 200; i += 2)
         {
             summ += sign * Math.pow(x, i)/fact;
             sign *= -1;

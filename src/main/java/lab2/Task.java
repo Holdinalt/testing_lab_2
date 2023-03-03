@@ -49,7 +49,8 @@ public class Task {
 
         FileWriter writer = setupWriter();
         Task task = new Task(writer);
-        System.out.println(task.Calculate(16));
+        for (double i = -10; i < 10; i += 0.1)
+            task.sin.execute(Math.round(i * 10.0)/10.0);
 
         writer.flush();
         writer.close();
