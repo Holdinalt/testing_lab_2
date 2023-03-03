@@ -164,7 +164,9 @@ public class Tests {
         assertEquals(task.Calculate(-0.8), -0.3309, 0.1);
         assertEquals(task.Calculate(-0.9), -27.5861, 0.1);
         assertEquals(task.Calculate(-1.0), 2.8975636, 0.1);
+        assertEquals(task.Calculate(-1.5), 1.2868, 0.1);
         assertEquals(task.Calculate(-2.0), 0.0227, 0.1);
-        assertEquals(task.Calculate(-1.0), 2.8975636, 0.1);
+        assertEquals(task.Calculate(-3.0), -5.79957, 0.1);
+
     }
 }
