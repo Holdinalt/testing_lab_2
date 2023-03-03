@@ -15,7 +15,7 @@ public class Tests {
     static TrigExecutable SinMock;
     static TrigExecutable CosMock;
 
-    private double readFromCsvValue(String filename, double value)
+    private static double readFromCsvValue(String filename, double value)
     {
         try (CSVReader reader = new CSVReader(new FileReader(filename)))
         {
@@ -35,7 +35,7 @@ public class Tests {
     }
 
     @BeforeAll
-    void createMocks()
+    static void createMocks()
     {
         SinMock = new TrigExecutable() {
             @Override
@@ -50,7 +50,7 @@ public class Tests {
 
         Csc csc = new Csc(SinMock);
 
-        assertEquals(csc.execute(1), 0.1);
-        assertEquals(csc.execute(0), 0);
+        assertEquals(csc.execute(1), 1.188395, 0.1);
+        assertEquals(csc.execute(0), Double.POSITIVE_INFINITY);
     }
 }
