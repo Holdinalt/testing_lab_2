@@ -2,7 +2,7 @@ package lab2.Mathematics.Trigonometric;
 
 import lab2.Mathematics.Writable;
 
-public class Sin extends Writable implements TrigExecutable{
+public class Sin extends TrigExecutable{
 
 
     @Override

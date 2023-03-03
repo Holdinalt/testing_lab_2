@@ -1,6 +1,8 @@
 package lab2.Mathematics.Logarithmic;
 
-public interface LogExecutable{
+import lab2.Mathematics.Writable;
 
-    double execute(double digit, double base) throws Exception;
+public abstract class LogExecutable extends Writable {
+
+    public abstract double execute(double digit, double base);
 }

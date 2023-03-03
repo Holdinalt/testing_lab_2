@@ -1,6 +1,8 @@
 package lab2.Mathematics.Trigonometric;
 
-public interface TrigExecutable {
+import lab2.Mathematics.Writable;
 
-    double execute(double digit);
+public abstract class TrigExecutable extends Writable {
+
+    public abstract double execute(double digit);
 }

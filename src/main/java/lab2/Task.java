@@ -2,20 +2,22 @@ package lab2;
 
 import lab2.Mathematics.Logarithmic.Ln;
 import lab2.Mathematics.Logarithmic.Log;
+import lab2.Mathematics.Logarithmic.LogExecutable;
 import lab2.Mathematics.Trigonometric.*;
+import lab2.Mathematics.Writable;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Task {
 
-    private final Sin sin;
-    private final Cos cos;
-    private final Tg tg;
-    private final Ctg ctg;
-    private final Sec sec;
-    private final Csc csc;
-    private final Log log;
+    private final TrigExecutable sin;
+    private final TrigExecutable cos;
+    private final TrigExecutable tg;
+    private final TrigExecutable ctg;
+    private final TrigExecutable sec;
+    private final TrigExecutable csc;
+    private final LogExecutable log;
 
     public Task() {
         this.sin = new Sin();
@@ -45,12 +47,21 @@ public class Task {
         this.log.setWriter(writer);
     }
 
+    public Task(TrigExecutable _sin, TrigExecutable _cos, TrigExecutable _tg, TrigExecutable _ctg, TrigExecutable _sec, TrigExecutable _csc, LogExecutable _log) {
+        this.sin = _sin;
+        this.cos = _cos;
+        this.tg = _tg;
+        this.ctg = _ctg;
+        this.sec = _sec;
+        this.csc = _csc;
+        this.log = _log;
+    }
+
     public static void main(String[] args) throws IOException {
 
         FileWriter writer = setupWriter();
         Task task = new Task(writer);
-        for (double i = -10; i < 10; i += 0.1)
-            task.sin.execute(Math.round(i * 10.0)/10.0);
+        System.out.println(task.Calculate(16));
 
         writer.flush();
         writer.close();

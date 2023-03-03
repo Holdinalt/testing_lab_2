@@ -1,5 +1,6 @@
 package lab2;
 
+import lab2.Mathematics.Logarithmic.LogExecutable;
 import lab2.Mathematics.Trigonometric.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ public class Tests {
     static TrigExecutable CtgMock;
     static TrigExecutable SecMock;
     static TrigExecutable TgMock;
+    static LogExecutable LogMock;
 
     private static double readFromCsvValue(String filename, double value)
     {
@@ -79,6 +81,19 @@ public class Tests {
             @Override
             public double execute(double digit) {
                 return readFromCsvValue("src/test/resources/tg.csv", digit);
+            }
+        };
+
+        LogMock = new LogExecutable() {
+            @Override
+            public double execute(double digit, double base) {
+                if (base == Math.E)
+                    return readFromCsvValue("src/test/resources/ln.csv", digit);
+                else if (base == 5)
+                    return readFromCsvValue("src/test/resources/log5.csv", digit);
+                else if (base == 10)
+                    return readFromCsvValue("src/test/resources/log10.csv", digit);
+                return Double.NaN;
             }
         };
     }

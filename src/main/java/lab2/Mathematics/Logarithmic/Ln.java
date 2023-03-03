@@ -1,13 +1,13 @@
 package lab2.Mathematics.Logarithmic;
 import lab2.Mathematics.Writable;
 
-public class Ln extends Writable implements LogExecutable{
+public class Ln extends LogExecutable{
 
     @Override
-    public double execute(double digit, double base) throws Exception {
+    public double execute(double digit, double base) {
 
         if(base != Math.E){
-            throw new Exception("Class Ln can count only E base");
+            throw new Error("Class Ln can count only E base");
         }
 
 

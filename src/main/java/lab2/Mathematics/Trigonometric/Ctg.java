@@ -2,7 +2,7 @@ package lab2.Mathematics.Trigonometric;
 
 import lab2.Mathematics.Writable;
 
-public class Ctg extends Writable implements TrigExecutable{
+public class Ctg extends TrigExecutable{
 
     private final TrigExecutable sin;
     private final TrigExecutable cos;

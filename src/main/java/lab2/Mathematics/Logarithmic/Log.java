@@ -1,7 +1,7 @@
 package lab2.Mathematics.Logarithmic;
 import lab2.Mathematics.Writable;
 
-public class Log extends Writable implements LogExecutable{
+public class Log extends LogExecutable{
 
     private final LogExecutable ln;
 
