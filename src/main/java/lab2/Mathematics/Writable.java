@@ -15,7 +15,7 @@ public abstract class Writable {
             try {
                 writer.write(String.join(",", data) + "\n");
             }catch (Exception e){
-                System.out.println("Неудалось записать в файл");
+                System.out.println("Не удалось записать в файл");
             }
         }
     }
