@@ -5,6 +5,7 @@ import lab2.Mathematics.Logarithmic.Log;
 import lab2.Mathematics.Logarithmic.LogExecutable;
 import lab2.Mathematics.Trigonometric.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -200,25 +201,25 @@ public class Lab2Tests {
 
     @Nested
     class LogTests{
-
-        static Log log = new Log(LogMock);
-
         @ParameterizedTest
         @ValueSource(doubles = {1, 3, 9, -3})
         void Log3Test(double x){
+            Log log = new Log(LogMock);
             assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 5, 25, -1})
         void Log5Test(double x){
-            assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
+            Log log = new Log(LogMock);
+            assertEquals(log.execute(x, 5), LogMock.execute(x, 5), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4, 10, -0.4, -1})
         void Log10Test(double x){
-            assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
+            Log log = new Log(LogMock);
+            assertEquals(log.execute(x, 10), LogMock.execute(x, 10), delta);
         }
     }
 

@@ -4,6 +4,7 @@ import lab2.Mathematics.Logarithmic.Ln;
 import lab2.Mathematics.Logarithmic.Log;
 import lab2.Mathematics.Logarithmic.LogExecutable;
 import lab2.Mathematics.Trigonometric.*;
+import lab2.Mathematics.Writable;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,6 +55,24 @@ public class Task {
         this.sec = _sec;
         this.csc = _csc;
         this.log = _log;
+    }
+
+    void FillFunctionMockTrig(double min, double max, double step, TrigExecutable func)
+    {
+        FileWriter writer = setupWriter();
+        func.setWriter(writer);
+
+        for (double i = min; i <= max; i += step)
+            func.execute(Math.round(i * 10.0) / 10.0);
+    }
+
+    void FillFunctionMockLog(double min, double max, double step, LogExecutable func, double base)
+    {
+        FileWriter writer = setupWriter();
+        func.setWriter(writer);
+
+        for (double i = min; i <= max; i += step)
+            func.execute(Math.round(i * 10.0) / 10.0, base);
     }
 
     public static void main(String[] args) throws IOException {
