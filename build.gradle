@@ -44,9 +44,7 @@ jacocoTestCoverageVerification {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'lab2/Task.class',
-                    'lab2/mathematics/Writable.class',
-                    'lab2//mathematics/trigonometric/Sin.class',
-                    'lab2/mathematics/logarithmic/Ln.class'
+                    'lab2/mathematics/Writable.class'
             ])
         }))
     }
