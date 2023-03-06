@@ -1,6 +1,4 @@
-package lab2.Mathematics.Trigonometric;
-
-import lab2.Mathematics.Writable;
+package lab2.mathematics.trigonometric;
 
 public class Csc extends TrigExecutable{
 

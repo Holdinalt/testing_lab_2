@@ -1,21 +1,19 @@
 package lab2;
 
-import lab2.Mathematics.Logarithmic.Ln;
-import lab2.Mathematics.Logarithmic.Log;
-import lab2.Mathematics.Logarithmic.LogExecutable;
-import lab2.Mathematics.Trigonometric.*;
+import com.opencsv.CSVReader;
+import lab2.mathematics.logarithmic.Log;
+import lab2.mathematics.logarithmic.LogExecutable;
+import lab2.mathematics.trigonometric.*;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
-import com.opencsv.*;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class Lab2Tests {
     static TrigExecutable SinMock;
@@ -28,14 +26,11 @@ public class Lab2Tests {
 
     static double delta = 0.1;
 
-    private static double readFromCsvValue(String filename, double value)
-    {
-        try (CSVReader reader = new CSVReader(new FileReader(filename)))
-        {
+    private static double readFromCsvValue(String filename, double value) {
+        try (CSVReader reader = new CSVReader(new FileReader(filename))) {
             String[] lineInArray;
             while ((lineInArray = reader.readNext()) != null) {
-                if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0)/10.0)
-                {
+                if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0) / 10.0) {
                     return Double.parseDouble(lineInArray[1]);
                 }
             }
@@ -46,8 +41,7 @@ public class Lab2Tests {
     }
 
     @BeforeAll
-    static void createMocks()
-    {
+    static void createMocks() {
         SinMock = new TrigExecutable() {
             @Override
             public double execute(double digit) {
@@ -108,73 +102,29 @@ public class Lab2Tests {
     }
 
     @Nested
-    class TrigTests{
-
-//        @Test
-//        void CosTest(){
-//            Cos cos = new Cos(SinMock);
-//
-//            assertEquals(cos.execute(0),1, 0.1);
-//
-//            assertEquals(cos.execute(1), 0.5403, 0.1);
-//            assertEquals(cos.execute(1.5), 0.0707, 0.1);
-//            assertEquals(cos.execute(3), -0.99, 0.1);
-//
-//            assertEquals(cos.execute(-1), 0.5403, 0.1);
-//            assertEquals(cos.execute(-1.5), 0.0707, 0.1);
-//            assertEquals(cos.execute(-3), -0.99, 0.1);
-//
-//            assertEquals(cos.execute(3.3), -0.987, 0.1);
-//            assertEquals(cos.execute(4), -0.6536, 0.1);
-//            assertEquals(cos.execute(6.2), 0.9965, 0.1);
-//
-//            assertEquals(cos.execute(-3.3), -0.987, 0.1);
-//            assertEquals(cos.execute(-4), -0.6536, 0.1);
-//            assertEquals(cos.execute(-6.2), 0.9965, 0.1);
-//
-//            assertEquals(cos.execute(-12), 0.84385, 0.1);
-//            assertEquals(cos.execute(25), 0.9912, 0.1);
-//        }
+    class TrigTests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
-        void CosTest(double x){
-            Ctg ctg = new Ctg(SinMock, CosMock);
+        void CosTest(double x) {
+            Cos cos = new Cos(SinMock);
 
-            assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
-            assertEquals(ctg.execute(-x), CtgMock.execute(-x), delta);
+            assertEquals(cos.execute(x), CosMock.execute(x), delta);
+            assertEquals(cos.execute(-x), CosMock.execute(-x), delta);
         }
 
-//        @Test
-//        void CscTest(){
-//            Csc csc = new Csc(SinMock);
-//
-//            assertEquals(csc.execute(0), Double.POSITIVE_INFINITY);
-//
-//            assertEquals(csc.execute(1), 1.188395, 0.1);
-//            assertEquals(csc.execute(1.5), 1.002511, 0.1);
-//            assertEquals(csc.execute(3), 7.085, 0.1);
-//
-//            assertEquals(csc.execute(-1), -1.188395, 0.1);
-//            assertEquals(csc.execute(-1.5), -1.002511, 0.1);
-//            assertEquals(csc.execute(-3), -7.085, 0.1);
-//
-//            assertEquals(csc.execute(-4), 1.3213487, 0.1);
-//            assertEquals(csc.execute(4), -1.3213487, 0.1);
-//        }
-
         @ParameterizedTest
-        @ValueSource(doubles = {0, Math.PI / 2, Math.PI, 3 * Math.PI/ 2, 2 * Math.PI})
-        void CscTest(double x){
-            Ctg ctg = new Ctg(SinMock, CosMock);
+        @ValueSource(doubles = {0, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
+        void CscTest(double x) {
+            Csc csc = new Csc(SinMock);
 
-            assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
-            assertEquals(ctg.execute(-x), CtgMock.execute(-x), delta);
+            assertEquals(csc.execute(x), CscMock.execute(x), delta);
+            assertEquals(csc.execute(-x), CscMock.execute(-x), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {Math.PI / 2, 3 * Math.PI / 4, Math.PI / 4})
-        void CtgTest(double x){
+        void CtgTest(double x) {
             Ctg ctg = new Ctg(SinMock, CosMock);
 
             assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
@@ -182,8 +132,8 @@ public class Lab2Tests {
         }
 
         @ParameterizedTest
-        @ValueSource(doubles = {0, Math.PI, -Math.PI, Math.PI/2, 3 * Math.PI/2})
-        void Sec(double x){
+        @ValueSource(doubles = {0, Math.PI, -Math.PI, Math.PI / 2, 3 * Math.PI / 2})
+        void Sec(double x) {
 
             Sec sec = new Sec(CosMock);
 
@@ -192,7 +142,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 4, -Math.PI / 4})
-        void Tg(double x){
+        void Tg(double x) {
 
             Tg tg = new Tg(SinMock, CosMock);
             assertEquals(tg.execute(x), TgMock.execute(x), delta);
@@ -200,32 +150,39 @@ public class Lab2Tests {
     }
 
     @Nested
-    class LogTests{
+    class LogTests {
+
         @ParameterizedTest
         @ValueSource(doubles = {1, 3, 9, -3})
-        void Log3Test(double x){
+        void log3Test(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 5, 25, -1})
-        void Log5Test(double x){
+        void Log5Test(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, 5), LogMock.execute(x, 5), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4, 10, -0.4, -1})
-        void Log10Test(double x){
+        void Log10Test(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, 10), LogMock.execute(x, 10), delta);
+        }
+
+        @ParameterizedTest
+        @ValueSource(doubles = {1, 4.5, 7.5, 12, -1.5})
+        void LnTest(double x) {
+            Log log = new Log(LogMock);
+            assertEquals(log.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
         }
     }
 
     @Test
-    void mainFunctionTest()
-    {
+    void mainFunctionTest() {
         Task task = new Task(SinMock, CosMock, TgMock, CtgMock, SecMock, CscMock, LogMock);
 
         assertEquals(task.Calculate(0.5), -0.149738, 0.1);

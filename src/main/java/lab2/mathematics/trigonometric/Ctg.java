@@ -1,19 +1,19 @@
-package lab2.Mathematics.Trigonometric;
+package lab2.mathematics.trigonometric;
 
-import lab2.Mathematics.Writable;
+public class Ctg extends TrigExecutable{
 
-public class Sec extends TrigExecutable{
-
+    private final TrigExecutable sin;
     private final TrigExecutable cos;
 
-    public Sec(TrigExecutable _cos) {
+    public Ctg(TrigExecutable _sin, TrigExecutable _cos){
+        sin = _sin;
         cos = _cos;
     }
 
     @Override
     public double execute(double digit) {
 
-        double out = 1 / cos.execute(digit);
+        double out = cos.execute(digit) / sin.execute(digit);
 
         tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 

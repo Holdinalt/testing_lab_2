@@ -1,5 +1,4 @@
-package lab2.Mathematics.Logarithmic;
-import lab2.Mathematics.Writable;
+package lab2.mathematics.logarithmic;
 
 public class Ln extends LogExecutable{
 

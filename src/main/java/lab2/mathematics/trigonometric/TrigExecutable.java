@@ -1,6 +1,6 @@
-package lab2.Mathematics.Trigonometric;
+package lab2.mathematics.trigonometric;
 
-import lab2.Mathematics.Writable;
+import lab2.mathematics.Writable;
 
 public abstract class TrigExecutable extends Writable {
 

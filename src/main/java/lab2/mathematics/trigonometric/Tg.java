@@ -1,15 +1,13 @@
-package lab2.Mathematics.Trigonometric;
-
-import lab2.Mathematics.Writable;
+package lab2.mathematics.trigonometric;
 
 public class Tg extends TrigExecutable{
 
     private final TrigExecutable sin;
     private final TrigExecutable cos;
 
-    public Tg(TrigExecutable _sin, TrigExecutable _cos){
-        sin = _sin;
-        cos = _cos;
+    public Tg(TrigExecutable sin, TrigExecutable cos){
+        this.sin = sin;
+        this.cos = cos;
     }
 
     @Override

@@ -1,10 +1,9 @@
 package lab2;
 
-import lab2.Mathematics.Logarithmic.Ln;
-import lab2.Mathematics.Logarithmic.Log;
-import lab2.Mathematics.Logarithmic.LogExecutable;
-import lab2.Mathematics.Trigonometric.*;
-import lab2.Mathematics.Writable;
+import lab2.mathematics.logarithmic.Ln;
+import lab2.mathematics.logarithmic.Log;
+import lab2.mathematics.logarithmic.LogExecutable;
+import lab2.mathematics.trigonometric.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,15 +18,15 @@ public class Task {
     private final TrigExecutable csc;
     private final LogExecutable log;
 
-    public Task() {
-        this.sin = new Sin();
-        this.cos = new Cos(sin);
-        this.tg = new Tg(sin, cos);
-        this.ctg = new Ctg(sin, cos);
-        this.sec = new Sec(cos);
-        this.csc = new Csc(sin);
-        this.log = new Log(new Ln());
-    }
+//    public Task() {
+//        this.sin = new Sin();
+//        this.cos = new Cos(sin);
+//        this.tg = new Tg(sin, cos);
+//        this.ctg = new Ctg(sin, cos);
+//        this.sec = new Sec(cos);
+//        this.csc = new Csc(sin);
+//        this.log = new Log(new Ln());
+//    }
 
     public Task(FileWriter writer) {
         this.sin = new Sin();
@@ -57,29 +56,32 @@ public class Task {
         this.log = _log;
     }
 
-    void FillFunctionMockTrig(double min, double max, double step, TrigExecutable func)
-    {
-        FileWriter writer = setupWriter();
-        func.setWriter(writer);
-
-        for (double i = min; i <= max; i += step)
-            func.execute(Math.round(i * 10.0) / 10.0);
-    }
-
-    void FillFunctionMockLog(double min, double max, double step, LogExecutable func, double base)
-    {
-        FileWriter writer = setupWriter();
-        func.setWriter(writer);
-
-        for (double i = min; i <= max; i += step)
-            func.execute(Math.round(i * 10.0) / 10.0, base);
-    }
+//    void FillFunctionMockTrig(double min, double max, double step, TrigExecutable func)
+//    {
+//        FileWriter writer = setupWriter();
+//        func.setWriter(writer);
+//
+//        for (double i = min; i <= max; i += step)
+//            func.execute(Math.round(i * 10.0) / 10.0);
+//    }
+//
+//    void FillFunctionMockLog(double min, double max, double step, LogExecutable func, double base)
+//    {
+//        FileWriter writer = setupWriter();
+//        func.setWriter(writer);
+//
+//        for (double i = min; i <= max; i += step)
+//            func.execute(Math.round(i * 10.0) / 10.0, base);
+//    }
 
     public static void main(String[] args) throws IOException {
 
         FileWriter writer = setupWriter();
         Task task = new Task(writer);
-        System.out.println(task.Calculate(16));
+
+        for(int i = -10; i <= 10; i++){
+            writer.write(i + "," + task.Calculate(i) + ",func\n");
+        }
 
         writer.flush();
         writer.close();
