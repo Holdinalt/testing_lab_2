@@ -1,6 +1,7 @@
 package lab2;
 
 import com.opencsv.CSVReader;
+import lab2.mathematics.logarithmic.Ln;
 import lab2.mathematics.logarithmic.Log;
 import lab2.mathematics.logarithmic.LogExecutable;
 import lab2.mathematics.trigonometric.*;
@@ -103,6 +104,14 @@ public class Lab2Tests {
 
     @Nested
     class TrigTests {
+        @ParameterizedTest
+        @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
+        void sinTest(double x) {
+            Sin sin = new Sin();
+
+            assertEquals(sin.execute(x), SinMock.execute(x), delta);
+            assertEquals(sin.execute(-x), SinMock.execute(-x), delta);
+        }
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
@@ -174,10 +183,11 @@ public class Lab2Tests {
         }
 
         @ParameterizedTest
-        @ValueSource(doubles = {1, 4.5, 7.5, 12, -1.5})
+        @ValueSource(doubles = {1, Math.E, 3, 5})
         void lnTest(double x) {
-            Log log = new Log(LogMock);
-            assertEquals(log.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
+            Ln ln = new Ln();
+
+            assertEquals(ln.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
         }
     }
 
