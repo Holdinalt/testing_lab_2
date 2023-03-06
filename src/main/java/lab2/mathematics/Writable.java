@@ -10,7 +10,7 @@ public abstract class Writable {
         this.writer = writer;
     }
 
-    protected void tryWriteToFile(final String[] data){
+    protected void tryWriteToFile(final String... data){
         if(writer != null){
             try {
                 writer.write(String.join(",", data) + "\n");

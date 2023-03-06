@@ -83,16 +83,16 @@ public class LabTask {
 
     public static void main(final String[] args) throws IOException {
 
-        final FileWriter writer = new FileWriter("out.txt", false);
-
-        final LabTask task = new LabTask(writer);
-
-        for(int i = -10; i <= 10; i++){
-            writer.write(i + "," + task.calculate(i) + ",func\n");
-        }
-
-//        writer.flush();
-        writer.close();
+//        final FileWriter writer = new FileWriter("out.txt", false);
+//
+//        final LabTask task = new LabTask(writer);
+//
+//        for(int i = -10; i <= 10; i++){
+//            writer.write(i + "," + task.calculate(i) + ",func\n");
+//        }
+//
+////        writer.flush();
+//        writer.close();
     }
 
     public double calculate(final double x){

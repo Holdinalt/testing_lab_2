@@ -11,14 +11,15 @@ public class LnFunc extends LogExecutable{
         }
 
 
-        double summ = 0;
+        double sum = 0;
+
         if (digit >= 0 && digit <= 2)
         {
             final double num = digit - 1;
 
-            for (int i = 1; i < 1000000; i += 2)
+            for (int i = 1; i < 1_000_000; i += 2)
             {
-                summ += Math.pow(num, i)/(double)i - Math.pow(num, i+1)/(double)(i+1);
+                sum += Math.pow(num, i)/(double)i - Math.pow(num, i+1)/(double)(i+1);
             }
         }
         else if (digit > 2)
@@ -26,13 +27,14 @@ public class LnFunc extends LogExecutable{
 
             final double num = digit / (digit - 1);
 
-            for ( int i = 1; i < 500000; i ++ )
+            for ( int i = 1; i < 500_000; i++ )
             {
-                summ += 1.0 / (i * Math.pow(num, i));
+                sum += 1.0 / (i * Math.pow(num, i));
             }
         }
 
-        final double out = summ; // Сделать out человеком
+
+        final double out = sum; // Сделать out человеком
 
         tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 

@@ -5,7 +5,6 @@ import lab2.mathematics.logarithmic.LnFunc;
 import lab2.mathematics.logarithmic.LogFunc;
 import lab2.mathematics.logarithmic.LogExecutable;
 import lab2.mathematics.trigonometric.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -16,145 +15,147 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.FileReader;
 
-public class Lab2Tests {
-    static TrigExecutable SinMock;
-    static TrigExecutable CosMock;
-    static TrigExecutable CscMock;
-    static TrigExecutable CtgMock;
-    static TrigExecutable SecMock;
-    static TrigExecutable TgMock;
-    static LogExecutable LogMock;
+class Lab2Tests {
 
-    static double delta = 0.1;
+    final static TrigExecutable SIN_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/sin.csv", digit);
+        }
+    };
 
-    private static double readFromCsvValue(String filename, double value) {
-        try (CSVReader reader = new CSVReader(new FileReader(filename))) {
-            String[] lineInArray;
-            while ((lineInArray = reader.readNext()) != null) {
-                if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0) / 10.0) {
-                    return Double.parseDouble(lineInArray[1]);
-                }
+    final static TrigExecutable COS_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/cos.csv", digit);
+        }
+    };
+
+    final static TrigExecutable CSC_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/csc.csv", digit);
+        }
+    };
+
+    final static TrigExecutable CTG_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/ctg.csv", digit);
+        }
+    };
+
+    final static TrigExecutable SEC_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/sec.csv", digit);
+        }
+    };
+
+    final static TrigExecutable TG_MOCK = new TrigExecutable() {
+        @Override
+        public double execute(final double digit) {
+            return readFromCsvValue("src/test/resources/tg.csv", digit);
+        }
+    };
+
+    final static LogExecutable LOG_MOCK = new LogExecutable() {
+        @Override
+        public double execute(final double digit, final double base) {
+
+            if (base == Math.E){
+                return readFromCsvValue("src/test/resources/ln.csv", digit);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            else if (base == 3){
+                return readFromCsvValue("src/test/resources/log3.csv", digit);
+            }
+            else if (base == 5){
+                return readFromCsvValue("src/test/resources/log5.csv", digit);
+            }
+            else if (base == 10){
+                return readFromCsvValue("src/test/resources/log10.csv", digit);
+            }
+            return Double.NaN;
+        }
+    };
+
+    final static double DELTA = 0.1;
+
+    private static double readFromCsvValue(final String filename, final double value) {
+
+        try (FileReader fr = new FileReader(filename)){
+            try (CSVReader reader = new CSVReader(fr)) {
+
+                String[] lineInArray;
+                while ((lineInArray = reader.readNext()) != null) {
+                    if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0) / 10.0) {
+                        return Double.parseDouble(lineInArray[1]);
+                    }
+                }
+
+            } catch (Exception e) {
+                return 0;
+//            e.printStackTrace();
+            }
+        } catch (Exception e){
+            return Double.NaN;
         }
         return Double.NaN;
-    }
-
-    @BeforeAll
-    static void createMocks() {
-        SinMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/sin.csv", digit);
-            }
-        };
-
-        CosMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/cos.csv", digit);
-            }
-        };
-
-        CscMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/csc.csv", digit);
-            }
-        };
-
-        CtgMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/ctg.csv", digit);
-            }
-        };
-
-        SecMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/sec.csv", digit);
-            }
-        };
-
-        TgMock = new TrigExecutable() {
-            @Override
-            public double execute(double digit) {
-                return readFromCsvValue("src/test/resources/tg.csv", digit);
-            }
-        };
-
-        LogMock = new LogExecutable() {
-            @Override
-            public double execute(double digit, double base) {
-
-                if (base == Math.E)
-                    return readFromCsvValue("src/test/resources/ln.csv", digit);
-                else if (base == 3)
-                    return readFromCsvValue("src/test/resources/log3.csv", digit);
-                else if (base == 5)
-                    return readFromCsvValue("src/test/resources/log5.csv", digit);
-                else if (base == 10)
-                    return readFromCsvValue("src/test/resources/log10.csv", digit);
-                return Double.NaN;
-            }
-        };
     }
 
     @Nested
     class TrigTests {
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
-        void sinTest(double x) {
-            SinFunc sin = new SinFunc();
+        void sinTest(final double x) {
+            final SinFunc sin = new SinFunc();
 
-            assertEquals(sin.execute(x), SinMock.execute(x), delta);
-            assertEquals(sin.execute(-x), SinMock.execute(-x), delta);
+            assertEquals(sin.execute(x), SIN_MOCK.execute(x), DELTA);
+            assertEquals(sin.execute(-x), SIN_MOCK.execute(-x), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
-        void cosTest(double x) {
-            CosFunc cos = new CosFunc(SinMock);
+        void cosTest(final double x) {
+            final CosFunc cos = new CosFunc(SIN_MOCK);
 
-            assertEquals(cos.execute(x), CosMock.execute(x), delta);
-            assertEquals(cos.execute(-x), CosMock.execute(-x), delta);
+            assertEquals(cos.execute(x), COS_MOCK.execute(x), DELTA);
+            assertEquals(cos.execute(-x), COS_MOCK.execute(-x), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
-        void cscTest(double x) {
-            CscFunc csc = new CscFunc(SinMock);
+        void cscTest(final double x) {
+            final CscFunc csc = new CscFunc(SIN_MOCK);
 
-            assertEquals(csc.execute(x), CscMock.execute(x), delta);
-            assertEquals(csc.execute(-x), CscMock.execute(-x), delta);
+            assertEquals(csc.execute(x), CSC_MOCK.execute(x), DELTA);
+            assertEquals(csc.execute(-x), CSC_MOCK.execute(-x), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {Math.PI / 2, 3 * Math.PI / 4, Math.PI / 4})
-        void ctgTest(double x) {
-            CtgFunc ctg = new CtgFunc(SinMock, CosMock);
+        void ctgTest(final double x) {
+            final CtgFunc ctg = new CtgFunc(SIN_MOCK, COS_MOCK);
 
-            assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
-            assertEquals(ctg.execute(-x), CtgMock.execute(-x), delta);
+            assertEquals(ctg.execute(x), CTG_MOCK.execute(x), DELTA);
+            assertEquals(ctg.execute(-x), CTG_MOCK.execute(-x), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, -Math.PI, Math.PI / 2, 3 * Math.PI / 2})
-        void secTest(double x) {
+        void secTest(final double x) {
 
-            SecFunc sec = new SecFunc(CosMock);
+            final SecFunc sec = new SecFunc(COS_MOCK);
 
-            assertEquals(sec.execute(x), SecMock.execute(x), delta);
+            assertEquals(sec.execute(x), SEC_MOCK.execute(x), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 4, -Math.PI / 4})
-        void tgTest(double x) {
+        void tgTest(final double x) {
 
-            TgFunc tg = new TgFunc(SinMock, CosMock);
-            assertEquals(tg.execute(x), TgMock.execute(x), delta);
+            final TgFunc tg = new TgFunc(SIN_MOCK, COS_MOCK);
+            assertEquals(tg.execute(x), TG_MOCK.execute(x), DELTA);
         }
     }
 
@@ -163,56 +164,56 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 3, 9, -3})
-        void log3Test(double x) {
-            LogFunc log = new LogFunc(LogMock);
-            assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
+        void log3Test(final double x) {
+            final LogFunc log = new LogFunc(LOG_MOCK);
+            assertEquals(log.execute(x, 3), LOG_MOCK.execute(x, 3), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 5, 25, -1})
-        void log5Test(double x) {
-            LogFunc log = new LogFunc(LogMock);
-            assertEquals(log.execute(x, 5), LogMock.execute(x, 5), delta);
+        void log5Test(final double x) {
+            final LogFunc log = new LogFunc(LOG_MOCK);
+            assertEquals(log.execute(x, 5), LOG_MOCK.execute(x, 5), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4, 10, -0.4, -1})
-        void log10Test(double x) {
-            LogFunc log = new LogFunc(LogMock);
-            assertEquals(log.execute(x, 10), LogMock.execute(x, 10), delta);
+        void log10Test(final double x) {
+            final LogFunc log = new LogFunc(LOG_MOCK);
+            assertEquals(log.execute(x, 10), LOG_MOCK.execute(x, 10), DELTA);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, Math.E, 3, 5})
-        void lnTest(double x) {
-            LnFunc ln = new LnFunc();
+        void lnTest(final double x) {
+            final LnFunc ln = new LnFunc();
 
-            assertEquals(ln.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
+            assertEquals(ln.execute(x, Math.E), LOG_MOCK.execute(x, Math.E), DELTA);
         }
     }
 
     @Test
     void mainFunctionTest() {
-        LabTask task = new LabTask(SinMock, CosMock, TgMock, CtgMock, SecMock, CscMock, LogMock);
+        final LabTask task = new LabTask(SIN_MOCK, COS_MOCK, TG_MOCK, CTG_MOCK, SEC_MOCK, CSC_MOCK, LOG_MOCK);
 
-        assertEquals(task.calculate(0.5), -0.149738, 0.1);
-        assertEquals(task.calculate(0.2), -8.83166, 0.1);
+        assertEquals(task.calculate(0.5), -0.149_738, 0.1);
+        assertEquals(task.calculate(0.2), -8.831_66, 0.1);
         assertEquals(task.calculate(1), 0, 0.1);
         assertEquals(task.calculate(2), 0, 0.1);
-        assertEquals(task.calculate(5), -0.6425, 0.1);
+        assertEquals(task.calculate(5), -0.642_5, 0.1);
 
-        assertEquals(task.calculate(-0.1), 8.4499, 0.1);
-        assertEquals(task.calculate(-0.2), 3.08731, 0.1);
-        assertEquals(task.calculate(-0.5), 0.0912918, 0.1);
+        assertEquals(task.calculate(-0.1), 8.449_9, 0.1);
+        assertEquals(task.calculate(-0.2), 3.087_31, 0.1);
+        assertEquals(task.calculate(-0.5), 0.091_291_8, 0.1);
         assertEquals(task.calculate(-0.6), 0.002, 0.1);
-        assertEquals(task.calculate(-0.5), 0.0912918, 0.1);
-        assertEquals(task.calculate(-0.7), -0.0103, 0.1);
-        assertEquals(task.calculate(-0.8), -0.3309, 0.1);
-        assertEquals(task.calculate(-0.9), -27.5861, 0.1);
-        assertEquals(task.calculate(-1.0), 2.8975636, 0.1);
-        assertEquals(task.calculate(-1.5), 1.2868, 0.1);
-        assertEquals(task.calculate(-2.0), 0.0227, 0.1);
-        assertEquals(task.calculate(-3.0), -5.79957, 0.1);
+        assertEquals(task.calculate(-0.5), 0.091_291_8, 0.1);
+        assertEquals(task.calculate(-0.7), -0.010_3, 0.1);
+        assertEquals(task.calculate(-0.8), -0.330_9, 0.1);
+        assertEquals(task.calculate(-0.9), -27.586_1, 0.1);
+        assertEquals(task.calculate(-1.0), 2.897_563_6, 0.1);
+        assertEquals(task.calculate(-1.5), 1.286_8, 0.1);
+        assertEquals(task.calculate(-2.0), 0.022_7, 0.1);
+        assertEquals(task.calculate(-3.0), -5.799_57, 0.1);
 
     }
 }

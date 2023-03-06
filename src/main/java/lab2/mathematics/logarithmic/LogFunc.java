@@ -14,14 +14,14 @@ public class LogFunc extends LogExecutable{
 
         double out;
 
-        if(base != Math.E){
-            out = ln.execute(digit, Math.E) / ln.execute(base, Math.E);
-        }
-        else {
+        if(base == Math.E){
             out = ln.execute(digit, Math.E);
         }
+        else {
+            out = ln.execute(digit, Math.E) / ln.execute(base, Math.E);
+        }
 
-        tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName() + base});
+        tryWriteToFile(String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName() + base);
 
         return out;
     }
