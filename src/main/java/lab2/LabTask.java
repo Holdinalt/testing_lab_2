@@ -83,14 +83,15 @@ public class LabTask {
 
     public static void main(final String[] args) throws IOException {
 
-        final FileWriter writer = setupWriter();
+        final FileWriter writer = new FileWriter("out.txt", false);
+
         final LabTask task = new LabTask(writer);
 
         for(int i = -10; i <= 10; i++){
             writer.write(i + "," + task.calculate(i) + ",func\n");
         }
 
-        writer.flush();
+//        writer.flush();
         writer.close();
     }
 
@@ -99,34 +100,23 @@ public class LabTask {
             return lessThanZero(x);
         }
         else{
-            return (moreThanZero(x));
+            return moreThanZero(x);
         }
     }
 
     private double lessThanZero(final double x){
-        final double firstBlank = Math.pow((tg.execute(x) + sin.execute(x)) - ctg.execute(x), 3);
-        final double secondBlank = (csc.execute(x) / sin.execute(x)) - sec.execute(x);
-        final double thirdBlank = (Math.pow(sec.execute(x), 2)) - sin.execute(x);
+        final double firstBlank = Math.pow(tg.execute(x) + sin.execute(x) - ctg.execute(x), 3);
+        final double secondBlank = csc.execute(x) / sin.execute(x) - sec.execute(x);
+        final double thirdBlank = Math.pow(sec.execute(x), 2) - sin.execute(x);
 
         return firstBlank / secondBlank / thirdBlank;
     }
 
     private double moreThanZero(final double x){
-        final double temp =  ((((log.execute(x, 5) - log.execute(x, 10))
-                + log.execute(x, 5)) - log.execute(x, 10))
-                - (log.execute(x, 5) * log.execute(x, 3)));
+        final double temp =  (log.execute(x, 5) - log.execute(x, 10)
+                + log.execute(x, 5) - log.execute(x, 10))
+                - (log.execute(x, 5) * log.execute(x, 3));
 
         return Math.pow(temp, 3);
-    }
-
-    private static FileWriter setupWriter(){
-        final FileWriter writer;
-        try {
-            writer = new FileWriter("out.txt", false);
-            return writer;
-        } catch (Exception e){
-            System.out.println("Проблема с записью в файл out.txt");
-            return null;
-        }
     }
 }
