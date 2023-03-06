@@ -1,14 +1,14 @@
 package lab2;
 
-import lab2.mathematics.logarithmic.Ln;
-import lab2.mathematics.logarithmic.Log;
+import lab2.mathematics.logarithmic.LnFunc;
+import lab2.mathematics.logarithmic.LogFunc;
 import lab2.mathematics.logarithmic.LogExecutable;
 import lab2.mathematics.trigonometric.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Task {
+public class LabTask {
 
     private final TrigExecutable sin;
     private final TrigExecutable cos;
@@ -28,14 +28,14 @@ public class Task {
 //        this.log = new Log(new Ln());
 //    }
 
-    public Task(FileWriter writer) {
-        this.sin = new Sin();
-        this.cos = new Cos(sin);
-        this.tg = new Tg(sin, cos);
-        this.ctg = new Ctg(sin, cos);
-        this.sec = new Sec(cos);
-        this.csc = new Csc(sin);
-        this.log = new Log(new Ln());
+    public LabTask(final FileWriter writer) {
+        this.sin = new SinFunc();
+        this.cos = new CosFunc(sin);
+        this.tg = new TgFunc(sin, cos);
+        this.ctg = new CtgFunc(sin, cos);
+        this.sec = new SecFunc(cos);
+        this.csc = new CscFunc(sin);
+        this.log = new LogFunc(new LnFunc());
 
         this.sin.setWriter(writer);
         this.cos.setWriter(writer);
@@ -46,14 +46,21 @@ public class Task {
         this.log.setWriter(writer);
     }
 
-    public Task(TrigExecutable _sin, TrigExecutable _cos, TrigExecutable _tg, TrigExecutable _ctg, TrigExecutable _sec, TrigExecutable _csc, LogExecutable _log) {
-        this.sin = _sin;
-        this.cos = _cos;
-        this.tg = _tg;
-        this.ctg = _ctg;
-        this.sec = _sec;
-        this.csc = _csc;
-        this.log = _log;
+    public LabTask(final TrigExecutable sin,
+                   final TrigExecutable cos,
+                   final TrigExecutable tg,
+                   final TrigExecutable ctg,
+                   final TrigExecutable sec,
+                   final TrigExecutable csc,
+                   final LogExecutable log
+    ) {
+        this.sin = sin;
+        this.cos = cos;
+        this.tg = tg;
+        this.ctg = ctg;
+        this.sec = sec;
+        this.csc = csc;
+        this.log = log;
     }
 
 //    void FillFunctionMockTrig(double min, double max, double step, TrigExecutable func)
@@ -74,36 +81,38 @@ public class Task {
 //            func.execute(Math.round(i * 10.0) / 10.0, base);
 //    }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
 
-        FileWriter writer = setupWriter();
-        Task task = new Task(writer);
+        final FileWriter writer = setupWriter();
+        final LabTask task = new LabTask(writer);
 
         for(int i = -10; i <= 10; i++){
-            writer.write(i + "," + task.Calculate(i) + ",func\n");
+            writer.write(i + "," + task.calculate(i) + ",func\n");
         }
 
         writer.flush();
         writer.close();
     }
 
-    public double Calculate(double x){
-        if (x <= 0)
+    public double calculate(final double x){
+        if (x <= 0){
             return lessThanZero(x);
-        else
-            return moreThanZero(x);
+        }
+        else{
+            return (moreThanZero(x));
+        }
     }
 
-    private double lessThanZero(double x){
-        double firstBlank = Math.pow((tg.execute(x) + sin.execute(x)) - ctg.execute(x), 3);
-        double secondBlank = (csc.execute(x) / sin.execute(x)) - sec.execute(x);
-        double thirdBlank = (Math.pow(sec.execute(x), 2)) - sin.execute(x);
+    private double lessThanZero(final double x){
+        final double firstBlank = Math.pow((tg.execute(x) + sin.execute(x)) - ctg.execute(x), 3);
+        final double secondBlank = (csc.execute(x) / sin.execute(x)) - sec.execute(x);
+        final double thirdBlank = (Math.pow(sec.execute(x), 2)) - sin.execute(x);
 
         return firstBlank / secondBlank / thirdBlank;
     }
 
-    private double moreThanZero(double x){
-        double temp =  ((((log.execute(x, 5) - log.execute(x, 10))
+    private double moreThanZero(final double x){
+        final double temp =  ((((log.execute(x, 5) - log.execute(x, 10))
                 + log.execute(x, 5)) - log.execute(x, 10))
                 - (log.execute(x, 5) * log.execute(x, 3)));
 
@@ -111,7 +120,7 @@ public class Task {
     }
 
     private static FileWriter setupWriter(){
-        FileWriter writer;
+        final FileWriter writer;
         try {
             writer = new FileWriter("out.txt", false);
             return writer;

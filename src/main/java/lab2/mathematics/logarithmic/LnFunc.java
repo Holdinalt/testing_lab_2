@@ -1,12 +1,13 @@
 package lab2.mathematics.logarithmic;
 
-public class Ln extends LogExecutable{
+public class LnFunc extends LogExecutable{
 
     @Override
-    public double execute(double digit, double base) {
+    public double execute(double digit, final double base) {
 
         if(base != Math.E){
-            throw new Error("Class Ln can count only E base");
+            return 0;
+//            throw new Error("Class Ln can count only E base");
         }
 
 
@@ -30,7 +31,7 @@ public class Ln extends LogExecutable{
             }
         }
 
-        double out = summ; // Сделать out человеком
+        final double out = summ; // Сделать out человеком
 
         tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 

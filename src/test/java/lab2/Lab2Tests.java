@@ -1,8 +1,8 @@
 package lab2;
 
 import com.opencsv.CSVReader;
-import lab2.mathematics.logarithmic.Ln;
-import lab2.mathematics.logarithmic.Log;
+import lab2.mathematics.logarithmic.LnFunc;
+import lab2.mathematics.logarithmic.LogFunc;
 import lab2.mathematics.logarithmic.LogExecutable;
 import lab2.mathematics.trigonometric.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -107,7 +107,7 @@ public class Lab2Tests {
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
         void sinTest(double x) {
-            Sin sin = new Sin();
+            SinFunc sin = new SinFunc();
 
             assertEquals(sin.execute(x), SinMock.execute(x), delta);
             assertEquals(sin.execute(-x), SinMock.execute(-x), delta);
@@ -116,7 +116,7 @@ public class Lab2Tests {
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
         void cosTest(double x) {
-            Cos cos = new Cos(SinMock);
+            CosFunc cos = new CosFunc(SinMock);
 
             assertEquals(cos.execute(x), CosMock.execute(x), delta);
             assertEquals(cos.execute(-x), CosMock.execute(-x), delta);
@@ -125,7 +125,7 @@ public class Lab2Tests {
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
         void cscTest(double x) {
-            Csc csc = new Csc(SinMock);
+            CscFunc csc = new CscFunc(SinMock);
 
             assertEquals(csc.execute(x), CscMock.execute(x), delta);
             assertEquals(csc.execute(-x), CscMock.execute(-x), delta);
@@ -134,7 +134,7 @@ public class Lab2Tests {
         @ParameterizedTest
         @ValueSource(doubles = {Math.PI / 2, 3 * Math.PI / 4, Math.PI / 4})
         void ctgTest(double x) {
-            Ctg ctg = new Ctg(SinMock, CosMock);
+            CtgFunc ctg = new CtgFunc(SinMock, CosMock);
 
             assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
             assertEquals(ctg.execute(-x), CtgMock.execute(-x), delta);
@@ -144,7 +144,7 @@ public class Lab2Tests {
         @ValueSource(doubles = {0, Math.PI, -Math.PI, Math.PI / 2, 3 * Math.PI / 2})
         void secTest(double x) {
 
-            Sec sec = new Sec(CosMock);
+            SecFunc sec = new SecFunc(CosMock);
 
             assertEquals(sec.execute(x), SecMock.execute(x), delta);
         }
@@ -153,7 +153,7 @@ public class Lab2Tests {
         @ValueSource(doubles = {0, Math.PI / 4, -Math.PI / 4})
         void tgTest(double x) {
 
-            Tg tg = new Tg(SinMock, CosMock);
+            TgFunc tg = new TgFunc(SinMock, CosMock);
             assertEquals(tg.execute(x), TgMock.execute(x), delta);
         }
     }
@@ -164,28 +164,28 @@ public class Lab2Tests {
         @ParameterizedTest
         @ValueSource(doubles = {1, 3, 9, -3})
         void log3Test(double x) {
-            Log log = new Log(LogMock);
+            LogFunc log = new LogFunc(LogMock);
             assertEquals(log.execute(x, 3), LogMock.execute(x, 3), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 5, 25, -1})
         void log5Test(double x) {
-            Log log = new Log(LogMock);
+            LogFunc log = new LogFunc(LogMock);
             assertEquals(log.execute(x, 5), LogMock.execute(x, 5), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4, 10, -0.4, -1})
         void log10Test(double x) {
-            Log log = new Log(LogMock);
+            LogFunc log = new LogFunc(LogMock);
             assertEquals(log.execute(x, 10), LogMock.execute(x, 10), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, Math.E, 3, 5})
         void lnTest(double x) {
-            Ln ln = new Ln();
+            LnFunc ln = new LnFunc();
 
             assertEquals(ln.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
         }
@@ -193,26 +193,26 @@ public class Lab2Tests {
 
     @Test
     void mainFunctionTest() {
-        Task task = new Task(SinMock, CosMock, TgMock, CtgMock, SecMock, CscMock, LogMock);
+        LabTask task = new LabTask(SinMock, CosMock, TgMock, CtgMock, SecMock, CscMock, LogMock);
 
-        assertEquals(task.Calculate(0.5), -0.149738, 0.1);
-        assertEquals(task.Calculate(0.2), -8.83166, 0.1);
-        assertEquals(task.Calculate(1), 0, 0.1);
-        assertEquals(task.Calculate(2), 0, 0.1);
-        assertEquals(task.Calculate(5), -0.6425, 0.1);
+        assertEquals(task.calculate(0.5), -0.149738, 0.1);
+        assertEquals(task.calculate(0.2), -8.83166, 0.1);
+        assertEquals(task.calculate(1), 0, 0.1);
+        assertEquals(task.calculate(2), 0, 0.1);
+        assertEquals(task.calculate(5), -0.6425, 0.1);
 
-        assertEquals(task.Calculate(-0.1), 8.4499, 0.1);
-        assertEquals(task.Calculate(-0.2), 3.08731, 0.1);
-        assertEquals(task.Calculate(-0.5), 0.0912918, 0.1);
-        assertEquals(task.Calculate(-0.6), 0.002, 0.1);
-        assertEquals(task.Calculate(-0.5), 0.0912918, 0.1);
-        assertEquals(task.Calculate(-0.7), -0.0103, 0.1);
-        assertEquals(task.Calculate(-0.8), -0.3309, 0.1);
-        assertEquals(task.Calculate(-0.9), -27.5861, 0.1);
-        assertEquals(task.Calculate(-1.0), 2.8975636, 0.1);
-        assertEquals(task.Calculate(-1.5), 1.2868, 0.1);
-        assertEquals(task.Calculate(-2.0), 0.0227, 0.1);
-        assertEquals(task.Calculate(-3.0), -5.79957, 0.1);
+        assertEquals(task.calculate(-0.1), 8.4499, 0.1);
+        assertEquals(task.calculate(-0.2), 3.08731, 0.1);
+        assertEquals(task.calculate(-0.5), 0.0912918, 0.1);
+        assertEquals(task.calculate(-0.6), 0.002, 0.1);
+        assertEquals(task.calculate(-0.5), 0.0912918, 0.1);
+        assertEquals(task.calculate(-0.7), -0.0103, 0.1);
+        assertEquals(task.calculate(-0.8), -0.3309, 0.1);
+        assertEquals(task.calculate(-0.9), -27.5861, 0.1);
+        assertEquals(task.calculate(-1.0), 2.8975636, 0.1);
+        assertEquals(task.calculate(-1.5), 1.2868, 0.1);
+        assertEquals(task.calculate(-2.0), 0.0227, 0.1);
+        assertEquals(task.calculate(-3.0), -5.79957, 0.1);
 
     }
 }

@@ -1,17 +1,18 @@
 package lab2.mathematics.trigonometric;
 
-public class Sec extends TrigExecutable{
+public class SecFunc extends TrigExecutable{
 
     private final TrigExecutable cos;
 
-    public Sec(TrigExecutable cos) {
+    public SecFunc(final TrigExecutable cos) {
+        super();
         this.cos = cos;
     }
 
     @Override
-    public double execute(double digit) {
+    public double execute(final double digit) {
 
-        double out = 1 / cos.execute(digit);
+        final double out = 1 / cos.execute(digit);
 
         tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 

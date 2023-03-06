@@ -1,17 +1,18 @@
 package lab2.mathematics.logarithmic;
 
-public class Log extends LogExecutable{
+public class LogFunc extends LogExecutable{
 
     private final LogExecutable ln;
 
-    public Log(LogExecutable ln){
+    public LogFunc(final LogExecutable ln){
+        super();
         this.ln = ln;
     }
 
     @Override
-    public double execute(double digit, double base) {
+    public double execute(final double digit, final double base) {
 
-        double out = 0;
+        double out;
 
         if(base != Math.E){
             out = ln.execute(digit, Math.E) / ln.execute(base, Math.E);

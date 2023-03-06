@@ -1,10 +1,10 @@
 package lab2.mathematics.trigonometric;
 
-public class Sin extends TrigExecutable{
+public class SinFunc extends TrigExecutable{
 
 
     @Override
-    public double execute(double digit) {
+    public double execute(final double digit) {
         double x = digit;
 
         if (x >= 0)
@@ -31,7 +31,7 @@ public class Sin extends TrigExecutable{
             sign *= -1;
             fact *= (i + 1) * (i + 2);
         }
-        double out = summ; // сделать аут человеком
+        final double out = summ; // сделать аут человеком
 
         tryWriteToFile(new String[] {String.valueOf(digit), String.valueOf(out), this.getClass().getSimpleName()});
 
