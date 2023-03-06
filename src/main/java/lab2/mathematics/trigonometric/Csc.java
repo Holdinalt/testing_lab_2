@@ -4,8 +4,8 @@ public class Csc extends TrigExecutable{
 
     private final TrigExecutable sin;
 
-    public Csc(TrigExecutable _sin){
-        sin = _sin;
+    public Csc(TrigExecutable sin){
+        this.sin = sin;
     }
 
     @Override

@@ -5,9 +5,9 @@ public class Ctg extends TrigExecutable{
     private final TrigExecutable sin;
     private final TrigExecutable cos;
 
-    public Ctg(TrigExecutable _sin, TrigExecutable _cos){
-        sin = _sin;
-        cos = _cos;
+    public Ctg(TrigExecutable sin, TrigExecutable cos){
+        this.sin = sin;
+        this.cos = cos;
     }
 
     @Override

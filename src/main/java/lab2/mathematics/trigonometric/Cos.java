@@ -4,8 +4,8 @@ public class Cos extends TrigExecutable{
 
     private final TrigExecutable sin;
 
-    public Cos(TrigExecutable _sin){
-        this.sin = _sin;
+    public Cos(TrigExecutable sin){
+        this.sin = sin;
     }
 
     @Override

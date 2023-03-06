@@ -4,8 +4,8 @@ public class Log extends LogExecutable{
 
     private final LogExecutable ln;
 
-    public Log(LogExecutable _ln){
-        ln = _ln;
+    public Log(LogExecutable ln){
+        this.ln = ln;
     }
 
     @Override

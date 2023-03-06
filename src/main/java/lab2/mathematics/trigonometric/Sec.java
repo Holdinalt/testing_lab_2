@@ -4,8 +4,8 @@ public class Sec extends TrigExecutable{
 
     private final TrigExecutable cos;
 
-    public Sec(TrigExecutable _cos) {
-        cos = _cos;
+    public Sec(TrigExecutable cos) {
+        this.cos = cos;
     }
 
     @Override
