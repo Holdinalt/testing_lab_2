@@ -106,7 +106,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, 2 * Math.PI, 0.5 * Math.PI})
-        void CosTest(double x) {
+        void cosTest(double x) {
             Cos cos = new Cos(SinMock);
 
             assertEquals(cos.execute(x), CosMock.execute(x), delta);
@@ -115,7 +115,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
-        void CscTest(double x) {
+        void cscTest(double x) {
             Csc csc = new Csc(SinMock);
 
             assertEquals(csc.execute(x), CscMock.execute(x), delta);
@@ -124,7 +124,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {Math.PI / 2, 3 * Math.PI / 4, Math.PI / 4})
-        void CtgTest(double x) {
+        void ctgTest(double x) {
             Ctg ctg = new Ctg(SinMock, CosMock);
 
             assertEquals(ctg.execute(x), CtgMock.execute(x), delta);
@@ -133,7 +133,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI, -Math.PI, Math.PI / 2, 3 * Math.PI / 2})
-        void Sec(double x) {
+        void secTest(double x) {
 
             Sec sec = new Sec(CosMock);
 
@@ -142,7 +142,7 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {0, Math.PI / 4, -Math.PI / 4})
-        void Tg(double x) {
+        void tgTest(double x) {
 
             Tg tg = new Tg(SinMock, CosMock);
             assertEquals(tg.execute(x), TgMock.execute(x), delta);
@@ -161,21 +161,21 @@ public class Lab2Tests {
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 5, 25, -1})
-        void Log5Test(double x) {
+        void log5Test(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, 5), LogMock.execute(x, 5), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4, 10, -0.4, -1})
-        void Log10Test(double x) {
+        void log10Test(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, 10), LogMock.execute(x, 10), delta);
         }
 
         @ParameterizedTest
         @ValueSource(doubles = {1, 4.5, 7.5, 12, -1.5})
-        void LnTest(double x) {
+        void lnTest(double x) {
             Log log = new Log(LogMock);
             assertEquals(log.execute(x, Math.E), LogMock.execute(x, Math.E), delta);
         }
