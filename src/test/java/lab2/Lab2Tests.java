@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 class Lab2Tests {
 
@@ -83,22 +84,20 @@ class Lab2Tests {
 
     private static double readFromCsvValue(final String filename, final double value) {
 
-        try (FileReader fr = new FileReader(filename)){
-            try (CSVReader reader = new CSVReader(fr)) {
+        try (CSVReader reader = new CSVReader(Files.newBufferedReader(Paths.get(filename)))) {
 
-                String[] lineInArray;
-                while ((lineInArray = reader.readNext()) != null) {
-                    if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0) / 10.0) {
-                        return Double.parseDouble(lineInArray[1]);
-                    }
+            String[] lineInArray;
+            lineInArray = reader.readNext();
+            while (lineInArray != null) {
+                if (Double.parseDouble(lineInArray[0]) == Math.round(value * 10.0) / 10.0) {
+                    return Double.parseDouble(lineInArray[1]);
                 }
-
-            } catch (Exception e) {
-                return 0;
-//            e.printStackTrace();
+                lineInArray = reader.readNext();
             }
-        } catch (Exception e){
-            return Double.NaN;
+
+        } catch (Exception e) {
+            return 0;
+//            e.printStackTrace();
         }
         return Double.NaN;
     }
