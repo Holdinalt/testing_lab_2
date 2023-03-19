@@ -193,7 +193,7 @@ class Lab2Tests {
 
     @Test
     void mainFunctionTest() {
-        final LabTask task = new LabTask(SIN_MOCK, COS_MOCK, TG_MOCK, CTG_MOCK, SEC_MOCK, CSC_MOCK, LOG_MOCK);
+        final LabTask task = new LabTask(SIN_MOCK, TG_MOCK, CTG_MOCK, SEC_MOCK, CSC_MOCK, LOG_MOCK);
 
         assertEquals(task.calculate(0.5), -0.149_738, 0.1);
         assertEquals(task.calculate(0.2), -8.831_66, 0.1);
